@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="view_width">2dp</dimen>
+    <dimen name="detail_fragment_margin">8dp</dimen>
+    <dimen name="view_height">2dp</dimen>
+    <dimen name="detail_card_height">200dp</dimen>
+    <dimen name="detail_card_margin">8dp</dimen>
+    <dimen name="card_image_width">80dp</dimen>
+    <dimen name="card_image_height">80dp</dimen>
+    <dimen name="card_image_margin_top">24dp</dimen>
+    <dimen name="card_name_text_margin_top">4dp</dimen>
+    <dimen name="card_name_text_size">16sp</dimen>
+    <dimen name="card_post_margin_top">8dp</dimen>
+    <dimen name="card_post_text_size">16sp</dimen>
+    <dimen name="card_land_image_width">140dp</dimen>
+    <dimen name="card_land_image_height">140dp</dimen>
+    <dimen name="card_name_land_text_size">24sp</dimen>
+    <dimen name="recycler_margin_top">8dp</dimen>
+</resources>
