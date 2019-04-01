@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.zaki.retrouser.R;
 import com.zaki.retrouser.model.UserPost;
 
-
 import java.util.ArrayList;
 
 public class UserPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -24,15 +23,15 @@ public class UserPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemView= LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.user_post_format,viewGroup,false);
+        View itemView = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.user_post_format, viewGroup, false);
         return new UserPostViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        UserPost posts=userPostArrayList.get(i);
-        UserPostViewHolder holder=(UserPostViewHolder) viewHolder;
+        UserPost posts = userPostArrayList.get(i);
+        UserPostViewHolder holder = (UserPostViewHolder) viewHolder;
         holder.tvPostId.setText(String.valueOf(posts.getPostId()));
         holder.tvPostTitle.setText(posts.getPostTitle());
         holder.tvPostBody.setText(posts.getPostBody());
@@ -43,14 +42,15 @@ public class UserPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return userPostArrayList.size();
     }
 
-    private class UserPostViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvPostTitle,tvPostBody,tvPostId;
+    //Custom View Holder class for users post
+    private class UserPostViewHolder extends RecyclerView.ViewHolder {
+        private TextView tvPostTitle, tvPostBody, tvPostId;
 
         public UserPostViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvPostId=itemView.findViewById(R.id.tv_post_id);
-            tvPostTitle=itemView.findViewById(R.id.tv_post_title);
-            tvPostBody=itemView.findViewById(R.id.tv_post_body);
+            tvPostId = itemView.findViewById(R.id.tv_post_id);
+            tvPostTitle = itemView.findViewById(R.id.tv_post_title);
+            tvPostBody = itemView.findViewById(R.id.tv_post_body);
         }
     }
 }

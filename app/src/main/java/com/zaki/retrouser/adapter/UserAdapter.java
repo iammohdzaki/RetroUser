@@ -18,6 +18,7 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<User> userArrayList;
     private UserClickListener userClickListener;
 
+
     public UserAdapter(ArrayList<User> userArrayList) {
         this.userArrayList = userArrayList;
     }
@@ -32,8 +33,8 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        User user=userArrayList.get(i);
-        UserViewHolder holder =(UserViewHolder)viewHolder;
+        User user = userArrayList.get(i);
+        UserViewHolder holder = (UserViewHolder) viewHolder;
         holder.ivUserImage.setImageResource(R.mipmap.ic_launcher);
         holder.tvUserId.setText(String.valueOf(user.getUserId()));
         holder.tvUserName.setText(user.getUserName());
@@ -46,23 +47,24 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return userArrayList.size();
     }
 
-    private class UserViewHolder extends RecyclerView.ViewHolder{
+    //View Holder Class for holding view
+    private class UserViewHolder extends RecyclerView.ViewHolder {
         private ImageView ivUserImage;
-        private TextView tvUserName,tvUserId,tvUserEmail;
+        private TextView tvUserName, tvUserId, tvUserEmail;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivUserImage=itemView.findViewById(R.id.iv_user_image);
-            tvUserId=itemView.findViewById(R.id.tv_user_id);
-            tvUserName=itemView.findViewById(R.id.tv_user_name);
-            tvUserEmail=itemView.findViewById(R.id.tv_user_email);
+            ivUserImage = itemView.findViewById(R.id.iv_user_image);
+            tvUserId = itemView.findViewById(R.id.tv_user_id);
+            tvUserName = itemView.findViewById(R.id.tv_user_name);
+            tvUserEmail = itemView.findViewById(R.id.tv_user_email);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(userClickListener!=null){
+                    if (userClickListener != null) {
                         int position = getAdapterPosition();
-                        if(position!=RecyclerView.NO_POSITION){
+                        if (position != RecyclerView.NO_POSITION) {
                             userClickListener.onCLick(position);
                         }
                     }
@@ -71,11 +73,12 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public interface UserClickListener{
+    //Interface for Click Listener
+    public interface UserClickListener {
         void onCLick(int position);
     }
 
-    public void setOnClickListener(UserClickListener listener){
-        userClickListener=listener;
+    public void setOnClickListener(UserClickListener listener) {
+        userClickListener = listener;
     }
 }

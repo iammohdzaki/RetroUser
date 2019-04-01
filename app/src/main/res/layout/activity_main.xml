@@ -7,13 +7,13 @@
     tools:context=".activity.MainActivity">
 
     <fragment
-        class="com.zaki.retrouser.fragment.UserListFragment"
-        android:layout_weight="1"
         android:id="@+id/fragment_list"
+        class="com.zaki.retrouser.fragment.UserListFragment"
         android:layout_width="match_parent"
-        tools:layout="@layout/user_list"
-        android:layout_margin="8dp"
-        android:layout_height="0dp"/>
+        android:layout_height="@dimen/height_fragment_list"
+        android:layout_margin="@dimen/margin_fragment_list"
+        android:layout_weight="1"
+        tools:layout="@layout/user_list" />
 
     <View
         android:layout_width="match_parent"
@@ -22,13 +22,13 @@
         android:background="@color/colorAccent" />
 
     <fragment
-        class="com.zaki.retrouser.fragment.UserDetailFragment"
         android:id="@+id/fragment_detail"
-        android:layout_weight="1"
-        tools:layout="@layout/user_detail"
-        android:layout_margin="@dimen/detail_fragment_margin"
+        class="com.zaki.retrouser.fragment.UserDetailFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:layout_height="@dimen/height_fragment_detail"
+        android:layout_margin="@dimen/detail_fragment_margin"
+        android:layout_weight="1"
+        tools:layout="@layout/user_detail" />
 
 
 </LinearLayout>

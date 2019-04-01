@@ -13,10 +13,10 @@ public class User {
     @SerializedName("email")
     private String userEmail;
 
-    public User(int userId, String userName,String userEmail) {
+    public User(int userId, String userName, String userEmail) {
         this.userId = userId;
         this.userName = userName;
-        this.userEmail=userEmail;
+        this.userEmail = userEmail;
     }
 
     public String getUserEmail() {
