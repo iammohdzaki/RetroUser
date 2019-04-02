@@ -12,9 +12,9 @@
     <color name="graylight">#fafafa</color>
     <color name="startblue">#09c6df</color>
 
-    <color name="placeholder_bg">#dddddd</color>
-    <color name="item_name">#0c0c0c</color>
-    <color name="description">#1a1a1a</color>
-    <color name="chef">#777</color>
-    <color name="timestamp">#777</color>
+
+    <color name="bluedark">#2f333f</color>
+    <color name="bluelight">#49acd5</color>
+    <color name="green">#45bc62</color>
+    <color name="orange">#eaad43</color>
 </resources>

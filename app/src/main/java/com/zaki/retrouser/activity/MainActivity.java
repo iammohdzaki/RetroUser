@@ -1,8 +1,11 @@
 package com.zaki.retrouser.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zaki.retrouser.R;
+import com.zaki.retrouser.UserDetailDialog;
 import com.zaki.retrouser.adapter.UserAdapter;
 import com.zaki.retrouser.api.ApiClient;
 import com.zaki.retrouser.api.ApiInterface;
@@ -30,23 +34,22 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<User> userArrayList = new ArrayList<>();
-    private TextView tvName;
-    private TextView tvId;
-    private TextView tvEmail;
-    private Button btnFetchPost;
+    private TextView tvName,tvId,tvEmail;
+    private Button btnFetchPost,btnDismissDialog,btnMoreDetail;
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ApiInterface apiInterface;
     private ProgressDialog progress;
+    private int userPosition=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         init();
         getUsersData();
+
 
     }
 
@@ -60,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_user_list);
         progress = ProgressDialog.show(this, getString(R.string.progress_title), getString(R.string.progress_body), true);
 
+        btnMoreDetail=findViewById(R.id.btn_more_details);
+        btnDismissDialog=findViewById(R.id.btn_dismiss_dialog);
+
         userAdapter = new UserAdapter(userArrayList);
         mLayoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -67,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerTouchHandle();
         fetchUserPost();
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+
     }
 
     //Fetch User Posts
@@ -94,13 +102,22 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                List<User> user = response.body();
-                for (int i = 0; i < user.size(); i++) {
-                    userArrayList.add(new User(user.get(i).getUserId(), user.get(i).getUserName(), user.get(i).getUserEmail()));
+                if(response.body().equals(null)){
+
+                }else{
+                    List<User> user = response.body();
+                    for (int i = 0; i < user.size(); i++) {
+                        userArrayList.add(new User(user.get(i).getUserId()
+                                                 , user.get(i).getUserName()
+                                                 , user.get(i).getUserEmail()
+                                                 , user.get(i).getUserUniqueName()
+                                                 , user.get(i).getUserPhone()
+                                                 , user.get(i).getUserWebsite()));
+                    }
+                    userAdapter.notifyDataSetChanged();
+                    progress.dismiss();
+                    Toast.makeText(MainActivity.this, getString(R.string.data_fetch_successful), Toast.LENGTH_LONG).show();
                 }
-                userAdapter.notifyDataSetChanged();
-                progress.dismiss();
-                Toast.makeText(MainActivity.this, getString(R.string.data_fetch_successful), Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -119,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
             public void onCLick(int position) {
                 User user = userArrayList.get(position);
                 setData(user.getUserName(), String.valueOf(user.getUserId()), user.getUserEmail());
+                showMoreDetails(position);
+                userPosition=position;
+
             }
         });
     }
@@ -149,5 +169,21 @@ public class MainActivity extends AppCompatActivity {
         });
         builder.setCancelable(false);
         builder.show();
+    }
+
+    public void showMoreDetails(final int position){
+        btnMoreDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(position==0){
+                    //Toast Error
+                }
+                else{
+                    UserDetailDialog detailDialog=new UserDetailDialog();
+                    detailDialog.show(getSupportFragmentManager(),"user_profile");
+                    //listener.applyTexts(userArrayList,userPosition);
+                }
+            }
+        });
     }
 }

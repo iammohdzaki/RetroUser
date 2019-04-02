@@ -13,10 +13,34 @@ public class User {
     @SerializedName("email")
     private String userEmail;
 
-    public User(int userId, String userName, String userEmail) {
+    @SerializedName("username")
+    private String userUniqueName;
+
+    @SerializedName("phone")
+    private String userPhone;
+
+    @SerializedName("website")
+    private String userWebsite;
+
+    public User(int userId, String userName, String userEmail, String userUniqueName,String userPhone,String userWebsite) {
         this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
+        this.userUniqueName=userUniqueName;
+        this.userPhone=userPhone;
+        this.userWebsite=userWebsite;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public String getUserWebsite() {
+        return userWebsite;
+    }
+
+    public String getUserUniqueName() {
+        return userUniqueName;
     }
 
     public String getUserEmail() {
